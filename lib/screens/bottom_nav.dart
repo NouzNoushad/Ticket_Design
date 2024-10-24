@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:trip_parallax/screens/home_screen/home_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class BottomNavScreen extends StatefulWidget {
+  const BottomNavScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<BottomNavScreen> createState() => _BottomNavScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _BottomNavScreenState extends State<BottomNavScreen> {
   int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -26,19 +27,18 @@ class _HomeScreenState extends State<HomeScreen> {
             });
           },
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
+            BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: ""),
             BottomNavigationBarItem(
-                icon: Icon(Icons.airplane_ticket), label: ""),
+                icon: Icon(Icons.confirmation_num_outlined), label: ""),
             BottomNavigationBarItem(
-                icon: Icon(Icons.calendar_month), label: ""),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
+                icon: Icon(Icons.calendar_month_outlined), label: ""),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.person_outline), label: ""),
           ]),
       body: IndexedStack(
         index: _selectedIndex,
         children: const [
-          Center(
-            child: Text('Home Screen'),
-          ),
+          HomeScreen(),
           Center(
             child: Text('Ticket Screen'),
           ),
