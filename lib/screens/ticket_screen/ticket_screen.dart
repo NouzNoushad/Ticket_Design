@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../clipper.dart';
 import '../dotted_line.dart';
+import 'components/ticket_bottom.dart';
+import 'components/ticket_top.dart';
 
 class TicketScreen extends StatefulWidget {
   const TicketScreen({super.key});
@@ -17,7 +19,9 @@ class _TicketScreenState extends State<TicketScreen> {
       backgroundColor: const Color.fromRGBO(249, 233, 216, 1),
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: const Icon(
             Icons.arrow_back_ios,
           ),
@@ -51,12 +55,9 @@ class _TicketScreenState extends State<TicketScreen> {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                      flex: 4,
-                      child: Container(
-                        color: Colors.blue,
-                      )),
+                  const Expanded(flex: 4, child: TicketTopSection()),
                   CustomPaint(
                     painter: DottedMiddlePath(),
                     child: SizedBox(
@@ -64,11 +65,7 @@ class _TicketScreenState extends State<TicketScreen> {
                       width: MediaQuery.of(context).size.width,
                     ),
                   ),
-                  Expanded(
-                      flex: 5,
-                      child: Container(
-                        color: Colors.yellow,
-                      )),
+                  const Expanded(flex: 5, child: TicketBottomSection()),
                 ],
               ),
             ),
