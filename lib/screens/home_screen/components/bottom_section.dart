@@ -1,5 +1,35 @@
 import 'package:flutter/material.dart';
 
+List<Map<String, dynamic>> upcoming = [
+  {
+    "image": "image1.jpg",
+    "from": "Pune",
+    "fromShort": "PNQ",
+    "to": "New Delhi",
+    "toShort": "DEL",
+    "date": "11 Oct 24",
+    "time": "1:30PM",
+  },
+  {
+    "image": "image2.jpeg",
+    "from": "Cochin",
+    "fromShort": "COK",
+    "to": "Agra",
+    "toShort": "AGR",
+    "date": "12 Oct 24",
+    "time": "2:30PM",
+  },
+  {
+    "image": "image3.jpg",
+    "from": "New Delhi",
+    "fromShort": "DEL",
+    "to": "Cochin",
+    "toShort": "COK",
+    "date": "10 Oct 24",
+    "time": "3:30PM",
+  },
+];
+
 class TripBottomSection extends StatefulWidget {
   const TripBottomSection({
     super.key,
@@ -62,8 +92,9 @@ class _TripBottomSectionState extends State<TripBottomSection>
     return PageView.builder(
         controller:
             PageController(viewportFraction: 0.95 + (padding / screenWidth)),
-        itemCount: 3,
+        itemCount: upcoming.length,
         itemBuilder: (context, index) {
+          final flight = upcoming[index];
           return Padding(
             padding: EdgeInsets.only(left: padding, right: padding),
             child: LayoutBuilder(builder: (context, constraints) {
@@ -81,10 +112,83 @@ class _TripBottomSectionState extends State<TripBottomSection>
                               color: Colors.blue,
                               borderRadius: BorderRadius.circular(20),
                             ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Stack(
+                                children: [
+                                  Image.asset(
+                                    'assets/${flight["image"]}',
+                                    fit: BoxFit.cover,
+                                    width: MediaQuery.of(context).size.width,
+                                  ),
+                                  Positioned.fill(
+                                      child: Container(
+                                    color:
+                                        const Color.fromARGB(131, 117, 97, 83),
+                                    padding: const EdgeInsets.all(20),
+                                    child: Column(
+                                      children: [
+                                        const Spacer(),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  flight["fromShort"],
+                                                  style: const TextStyle(
+                                                      fontSize: 30,
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                      color: Colors.white),
+                                                ),
+                                                Text(
+                                                  flight["from"],
+                                                  style: const TextStyle(
+                                                      fontSize: 12,
+                                                      color: Colors.white),
+                                                ),
+                                              ],
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  flight["toShort"],
+                                                  style: const TextStyle(
+                                                      fontSize: 30,
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                      color: Colors.white),
+                                                ),
+                                                Text(
+                                                  flight["to"],
+                                                  style: const TextStyle(
+                                                      fontSize: 12,
+                                                      color: Colors.white),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ))
+                                ],
+                              ),
+                            ),
                           )),
-                      const Expanded(
+                      Expanded(
                           child: Padding(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 8,
                         ),
@@ -94,15 +198,15 @@ class _TripBottomSectionState extends State<TripBottomSection>
                                 child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
+                                const Text(
                                   'Travel Date',
                                   style: TextStyle(
                                       fontSize: 12,
                                       color: Color.fromRGBO(117, 97, 83, 1)),
                                 ),
                                 Text(
-                                  '11 Oct 24',
-                                  style: TextStyle(
+                                  flight["date"],
+                                  style: const TextStyle(
                                       fontSize: 18,
                                       color: Color.fromRGBO(117, 97, 83, 1)),
                                 ),
@@ -113,22 +217,22 @@ class _TripBottomSectionState extends State<TripBottomSection>
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Departure',
                                     style: TextStyle(
                                         fontSize: 12,
                                         color: Color.fromRGBO(117, 97, 83, 1)),
                                   ),
                                   Text(
-                                    '1:30PM',
-                                    style: TextStyle(
+                                    flight["time"],
+                                    style: const TextStyle(
                                         fontSize: 18,
                                         color: Color.fromRGBO(117, 97, 83, 1)),
                                   ),
                                 ],
                               ),
                             )),
-                            Expanded(
+                            const Expanded(
                               child: Align(
                                 alignment: Alignment.centerRight,
                                 child: Text(
