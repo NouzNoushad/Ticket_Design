@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:trip_parallax/screens/ticket_screen/ticket_screen.dart';
 

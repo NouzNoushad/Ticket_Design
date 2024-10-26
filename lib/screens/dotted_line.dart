@@ -11,31 +11,31 @@ class DottedMiddlePath extends CustomPainter {
 
     void drawDashedLine({
       required Canvas canvas,
-      required Offset p1,
-      required Offset p2,
+      required Offset offset1,
+      required Offset offset2,
       required List<double> pattern,
       required Paint paint,
     }) {
-      final double distance = (p2 - p1).distance;
-      final List<double> fullPattern =
+      final double distance = (offset2 - offset1).distance;
+      final List<double> patternList =
           pattern.map((width) => width / distance).toList();
-      final points = <Offset>[];
+      final List<Offset> points = <Offset>[];
       double t = 0;
       int i = 0;
       while (t < 1) {
-        points.add(Offset.lerp(p1, p2, t)!);
-        t += fullPattern[i++];
-        points.add(Offset.lerp(p1, p2, t.clamp(0, 1))!);
-        t += fullPattern[i++];
-        i %= fullPattern.length;
+        points.add(Offset.lerp(offset1, offset2, t)!);
+        t += patternList[i++];
+        points.add(Offset.lerp(offset1, offset2, t.clamp(0, 1))!);
+        t += patternList[i++];
+        i %= patternList.length;
       }
       canvas.drawPoints(PointMode.lines, points, paint);
     }
 
     drawDashedLine(
         canvas: canvas,
-        p1: Offset(0, size.height * 0.6),
-        p2: Offset(size.width, size.height * 0.6),
+        offset1: Offset(0, size.height * 0.6),
+        offset2: Offset(size.width, size.height * 0.6),
         pattern: [10, 5],
         paint: paint);
   }
