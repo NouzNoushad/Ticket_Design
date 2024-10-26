@@ -2,6 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import '../../clipper.dart';
+import '../../dotted_line.dart';
+
 class TripTopSection extends StatefulWidget {
   const TripTopSection({
     super.key,
@@ -248,97 +251,4 @@ class _TripTopSectionState extends State<TripTopSection>
       ));
 }
 
-class DottedMiddlePath extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = const Color.fromRGBO(117, 97, 83, 1)
-      ..strokeWidth = 1;
 
-    void drawDashedLine({
-      required Canvas canvas,
-      required Offset p1,
-      required Offset p2,
-      required List<double> pattern,
-      required Paint paint,
-    }) {
-      final double distance = (p2 - p1).distance;
-      final List<double> fullPattern =
-          pattern.map((width) => width / distance).toList();
-      final points = <Offset>[];
-      double t = 0;
-      int i = 0;
-      while (t < 1) {
-        points.add(Offset.lerp(p1, p2, t)!);
-        t += fullPattern[i++];
-        points.add(Offset.lerp(p1, p2, t.clamp(0, 1))!);
-        t += fullPattern[i++];
-        i %= fullPattern.length;
-      }
-      canvas.drawPoints(PointMode.lines, points, paint);
-    }
-
-    drawDashedLine(
-        canvas: canvas,
-        p1: Offset(0, size.height * 0.6),
-        p2: Offset(size.width, size.height * 0.6),
-        pattern: [10, 5],
-        paint: paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
-  }
-}
-
-class TicketClipper extends CustomClipper<Path> {
-  TicketClipper({
-    this.position = 50,
-    this.radius = 15,
-  });
-
-  double position;
-  final double radius;
-
-  @override
-  Path getClip(Size size) {
-    var h = size.height;
-    var w = size.width;
-    position = position + (radius * 0.25);
-    final path = Path();
-
-    // Top
-    path.moveTo(0, 0);
-    path.lineTo(position - radius, 0.0);
-
-    // Right
-    path.lineTo(w, 0.0);
-    path.lineTo(w, position - radius);
-    path.arcToPoint(
-      Offset(w, position),
-      clockwise: false,
-      radius: const Radius.circular(1),
-    );
-
-    // Bottom
-    path.lineTo(w, h);
-    path.lineTo(position, h);
-
-    // Left
-    path.lineTo(0.0, h);
-    path.lineTo(0, position);
-    path.arcToPoint(
-      Offset(0, position - radius),
-      clockwise: false,
-      radius: const Radius.circular(1),
-    );
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return false;
-  }
-}

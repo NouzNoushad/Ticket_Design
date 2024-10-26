@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:trip_parallax/screens/home_screen/components/bottom_section.dart';
 import 'package:trip_parallax/screens/home_screen/components/top_section.dart';
@@ -18,6 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(249, 233, 216, 1),
       appBar: AppBar(
+        foregroundColor: const Color.fromRGBO(117, 97, 83, 1),
         backgroundColor: const Color.fromRGBO(249, 233, 216, 1),
         title: const Text("My Trips"),
         centerTitle: true,

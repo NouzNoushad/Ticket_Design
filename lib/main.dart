@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'screens/bottom_nav.dart';
+import 'package:trip_parallax/screens/ticket_screen/ticket_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const BottomNavScreen(),
+      home: const TicketScreen(),
     );
   }
 }
