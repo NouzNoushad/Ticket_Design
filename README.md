@@ -1,4 +1,4 @@
-# trip_parallax
+# flight_trip
 
 A new Flutter project.
 
